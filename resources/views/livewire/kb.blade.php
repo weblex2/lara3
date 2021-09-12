@@ -7,11 +7,17 @@
     
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
         	<div class="my-4">
-        	Search: <input wire:keydown.enter="search($event.target.value)" 
+        	Search: <input  
         			 type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
         			 id="search" placeholder="Enter Name" wire:model="search">
             
         	</div>
+        	<div class="my-4">
+        	Pages: <input wire:keydown.enter="setPages($event.target.value)" 
+        			 type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+        			 id="rowsPerPage" placeholder="Enter Name" wire:model="rowsPerPage">
+            
+        	</div> 
            
             
             @if($isModalOpen)
@@ -46,6 +52,7 @@
                     @endforeach
                 </tbody>
             </table>
+           {{ $kbs->links() }}
             <button wire:click="create()"
                 class="my-4 inline-flex justify-center rounded-md border border-transparent px-4 py-2 bg-green-600 text-base font-bold text-white shadow-sm hover:bg-green-700">
                 Create Knowledge Base Record
@@ -60,6 +67,10 @@
                 </div>
             </div>
             @endif
+            
+            <div id="debug">
+            	
+            </div>
             
         </div>
     </div>

@@ -10,14 +10,19 @@ class Kbs extends Component
 {
     
     use WithPagination;
-    public $kbs, $header, $header2, $content, $kb_id, $search, $showMore;
+    public $header, $header2, $content, $kb_id, $search, $showMore, $rowsPerPage;
     public $isModalOpen = 0;
     
     public function render()
     {
         $search = '%'.$this->search.'%';
-        $this->kbs = KB::where('header', 'like', $search)->get();
-        return view('livewire.kb');
+        $rowsPerPage = $this->rowsPerPage;
+        if ($rowsPerPage=="") $rowsPerPage = 4;
+        $this->kbs = KB::where('header', 'like', $search)->paginate($rowsPerPage);
+        #$this->kbs = collect($this->kbs->items());
+        #$this->kbs = $kbs;
+        return view('livewire.kb', ['kbs' => $this->kbs]);
+        
     }
     
     
@@ -85,5 +90,11 @@ class Kbs extends Component
         $this->showMore = !$this->showMore;
     }
     
+    
+    
+    public function setPages($rowsPerPage)
+    {
+        $this->rowsPerPage = $rowsPerPage;
+    }
     
 }
