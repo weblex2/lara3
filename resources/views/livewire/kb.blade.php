@@ -1,9 +1,7 @@
-<x-slot name="header">
-    <!--  h2 class="text-center">Laravel 8 Livewire CRUD Demo</h2-->
-</x-slot>
+
 <div class="menu">
 
-<div class="bg-white shadow w-1/4 float-left h-screen border  sm:px-6 lg:px-8">
+<div class="bg-white shadow w-1/4 float-left h-100 rounded mt-4 border  sm:px-6 lg:px-8">
 
     <div class="my-4 grid grid-cols-12 gap-1">
     	<div class="col-span-2">Search:</div>
@@ -20,9 +18,15 @@
     	</div> 
     	
     	</div>
+    	
+    	<button wire:click="create()"
+                class="my-4 inline-flex justify-center rounded-md border border-transparent px-4 py-2 bg-green-600 text-base font-bold text-white shadow-sm hover:bg-green-700">
+                Create Knowledge Base Record
+            </button>
+    	
 </div>
 
-<div class="w-3/4 float-left mx-auto sm:px-6 lg:px-8">
+<div class="w-3/4 float-left mt-4 mx-auto sm:px-6 lg:px-8">
     
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
         	
@@ -60,10 +64,7 @@
                 </tbody>
             </table>
            {{ $kbs->links() }}
-            <button wire:click="create()"
-                class="my-4 inline-flex justify-center rounded-md border border-transparent px-4 py-2 bg-green-600 text-base font-bold text-white shadow-sm hover:bg-green-700">
-                Create Knowledge Base Record
-            </button>
+            
              @if (session()->has('message'))
             <div class="bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md my-3"
                 role="alert">
@@ -80,21 +81,45 @@
             
             @if($isSelectedId)
             	<div>
-            	{!! nl2br(e($kbs[0]->content)) !!}
-            	</div>
+            	<div class="w-100">
             	<button wire:click="$set('isSelectedId', null)"
-                class="flex px-4 py-2 bg-green-500 text-gray-900 cursor-pointer rounded float-left">
-                Back
+                		class="flex px-4 py-2 bg-green-500 text-gray-900 cursor-pointer rounded float-left">
+               			 Back
            		 </button>
            		 
            		 <button wire:click="edit({{ $kbs[0]->id }})"
-                                class="ml-1 flex px-4 py-2 bg-blue-500 text-gray-900 cursor-pointer rounded float-left">Edit</button>
-                            
-                            <button wire:click="delete({{ $kbs[0]->id }})"
-                                class="ml-1 flex px-4 py-2 bg-red-600 text-gray-900 cursor-pointer rounded float-left">Delete</button>
-            
-            
-            
+                        class="ml-1 flex px-4 py-2 bg-blue-500 text-gray-900 cursor-pointer rounded float-left">
+                        Edit
+                 </button>
+                 
+                 <button wire:click="delete({{ $kbs[0]->id }})"
+                 		class="ml-1 flex px-4 py-2 bg-red-600 text-gray-900 cursor-pointer rounded float-left">
+                 		Delete
+                 </button>
+                 <br/><br/>
+                 <div></div>
+                 </div>
+                 
+                 <div class="float-none">
+            		{!! nl2br(e($kbs[0]->content)) !!}
+            	 </div>
+            	
+            	
+            	<button wire:click="$set('isSelectedId', null)"
+                		class="flex px-4 py-2 bg-green-500 text-gray-900 cursor-pointer rounded float-left">
+               			 Back
+           		 </button>
+           		 
+           		 <button wire:click="edit({{ $kbs[0]->id }})"
+                        class="ml-1 flex px-4 py-2 bg-blue-500 text-gray-900 cursor-pointer rounded float-left">
+                        Edit
+                 </button>
+                 
+                 <button wire:click="delete({{ $kbs[0]->id }})"
+                 		class="ml-1 flex px-4 py-2 bg-red-600 text-gray-900 cursor-pointer rounded float-left">
+                 		Delete
+                 </button>
+                 </div>
             @endif
             
             

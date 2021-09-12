@@ -1118,6 +1118,9 @@ select {
 .float-left {
 	float: left;
 }
+.float-none {
+	float: none;
+}
 .mx-auto {
 	margin-left: auto;
 	margin-right: auto;
