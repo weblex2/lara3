@@ -12,7 +12,7 @@ class kb extends Model
     protected $fillable = [
         'header',
         'header2',
-        'content'
+        'content' 
     ];   
     
 }
